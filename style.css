@@ -17,4 +17,8 @@ h1 {
     height: 50px;
     font-size: 20pt;
     text-align: center;
+    border: 20%;
+    border-color:slategrey;
+    text-transform: uppercase;
+    margin: 0.25%;
 }
