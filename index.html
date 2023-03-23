@@ -10,12 +10,13 @@
 
   <body>
     <h1>Word Masters!</h1>
-    <form id="row1">
-      <input maxlength="1" class="letterSquare" autofocus/>
-      <input maxlength="1" class="letterSquare" />
-      <input maxlength="1" class="letterSquare" />
-      <input maxlength="1" class="letterSquare" />
-      <input maxlength="1" class="letterSquare" />
+    <form id="row1" onsubmit="console.log(target.text)">
+      <input id="letter1" onkeydown="return /[A-Za-z]/.test(event.key)" maxlength="1" class="letterSquare" autofocus/>
+      <input id="letter2" onkeydown="return /[A-Za-z]/.test(event.key)" maxlength="1" class="letterSquare" />
+      <input id="letter3" onkeydown="return /[A-Za-z]/.test(event.key)" maxlength="1" class="letterSquare" />
+      <input id="letter4" onkeydown="return /[A-Za-z]/.test(event.key)" maxlength="1" class="letterSquare" />
+      <input id="letter5" onkeydown="return /[A-Za-z]/.test(event.key)" maxlength="1" class="letterSquare" />
+      <input id="letter6" type="submit" hidden />
     </form>
     <form id="row2">
       <input maxlength="1" class="letterSquare" />
@@ -52,5 +53,6 @@
       <input maxlength="1" class="letterSquare" />
       <input maxlength="1" class="letterSquare" />
     </form>
+    <script src="./script.js"> </script>
   </body>
 </html>
