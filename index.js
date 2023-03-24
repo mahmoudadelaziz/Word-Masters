@@ -1,13 +1,13 @@
 // Global variables
 let wordOfTheDay = "";
-let currntWord = "";
+let currentWord = "";
 let arr_guess = [];
 let arr_ans = [];
 
 fetch("https://words.dev-apis.com/word-of-the-day")
   .then((Response) => Response.json())
   .then((json) => {
-    console.log(`The answer is actually ${json.word}`);
+    console.log(`The answer is actually "${json.word}"`);
     wordOfTheDay = json.word;
   });
 
@@ -73,12 +73,12 @@ let linesArray = Array.from(document.forms);
 linesArray.forEach(function (line) {
   line.addEventListener("submit", function () {
     // Set the current word to the word entered
-    currntWord = getWord(line);
+    currentWord = getWord(line);
     // Each time a word is Entered, do this
     fetch("https://words.dev-apis.com/validate-word", {
       method: "POST",
       body: JSON.stringify({
-        word: currntWord,
+        word: currentWord,
       }),
     })
       .then((response) => response.json())
@@ -96,7 +96,7 @@ linesArray.forEach(function (line) {
           });
 
           // Scenario #1 (Dream World!)
-          if (currntWord === wordOfTheDay) {
+          if (currentWord === wordOfTheDay) {
             // Player entered the Word of the Day
             // 1. Display Winning Message
             console.log("YOU WON! HOORAY!");
@@ -112,7 +112,7 @@ linesArray.forEach(function (line) {
             // Scenario #2 (Valid word but not the WotD)
             // Compare letter by letter
             // Prepare two arrays for comparison
-            arr_guess = currntWord.split("");
+            arr_guess = currentWord.split("");
             arr_ans = wordOfTheDay.split("");
             arr_guess.forEach((guessLetter) => {
               // For each letter in the guessed word,
@@ -120,7 +120,27 @@ linesArray.forEach(function (line) {
               if (!wordOfTheDay.includes(guessLetter)) {
                 // The WoTD does NOT include this letter
                 // Turn the square background to grey
-                line[currntWord.indexOf(guessLetter)].style.backgroundColor = "gray"
+                line[currentWord.indexOf(guessLetter)].style.backgroundColor =
+                  "gray";
+              } else if (wordOfTheDay.includes(guessLetter)) {
+                // A RIGHT LETTER
+                if (
+                  currentWord.indexOf(guessLetter) !=
+                  wordOfTheDay.indexOf(guessLetter)
+                ) {
+                  // THE RIGHT LETTER AT THE WRONG POSITION
+                  // Turn the square background to yellow
+                  line[currentWord.indexOf(guessLetter)].style.backgroundColor =
+                    "orange";
+                } else if (
+                  currentWord.indexOf(guessLetter) ===
+                  wordOfTheDay.indexOf(guessLetter)
+                ) {
+                  // THE RIGHT LETTER AT THE RIGHT POSITION
+                  // Turn the square background to green
+                  line[currentWord.indexOf(guessLetter)].style.backgroundColor =
+                    "lightgreen";
+                }
               }
             });
           }
