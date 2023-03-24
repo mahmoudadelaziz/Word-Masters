@@ -30,7 +30,6 @@ function init() {
         if (isAlpha(event.key)) {
           document.getElementById(`letter${i + 1}`).focus();
         } else if (event.key === "Backspace") {
-          lettersEntered.pop();
           if (i != 1) {
             document.getElementById(`letter${i - 1}`).focus();
           }
@@ -49,9 +48,6 @@ function init() {
       );
       wordGuessed = lettersEntered.join("");
       console.log(wordGuessed);
-
-      validateWord(wordGuessed);
-
       // reset buffers and get ready for next line
       lettersEntered = [];
       wordGuessed = "";
