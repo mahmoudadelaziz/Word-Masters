@@ -1,5 +1,6 @@
 body {
     background-color: seagreen;
+    font-weight: bolder;
     width: 50%;
     vertical-align: middle;
     text-align: center;
@@ -16,8 +17,9 @@ h1 {
     height: 50px;
     font-size: 20pt;
     text-align: center;
-    border: 20%;
+    border: 2.5pt;
     border-color: slategrey;
+    border-style: double;
     text-transform: uppercase;
     margin: 0.25%;
 }

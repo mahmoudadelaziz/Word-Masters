@@ -127,9 +127,15 @@ linesArray.forEach(function (line) {
                 } else if (i === arr_ans.indexOf(arr_guess[i])) {
                   // THE RIGHT LETTER AT THE RIGHT POSITION
                   // Turn the square background to light green
-                  line[i].style.backgroundColor = "lightgreen";
+                  line[i].style.backgroundColor = "green";
                 }
+                // TRYING TO FIX DOUBLE LETTER ISSUE
+                // arr_guess.splice(i, 1);
+                // arr_ans.splice(i, 1);
               }
+              // TRYING TO FIX DOUBLE LETTER ISSUE
+              // arr_guess.splice(i, 1);
+              // arr_ans.splice(i, 1);
             }
           }
         } else if (json.validWord === false) {
