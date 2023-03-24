@@ -1,3 +1,13 @@
+// Global variables
+let wordOfTheDay = ''
+
+fetch("https://words.dev-apis.com/word-of-the-day")
+  .then((Response) => Response.json())
+  .then((json) => {
+    console.log(`The answer is actually ${json.word}`);
+    wordOfTheDay = json.word;
+  });
+
 // Function definitions
 var isAlpha = function (ch) {
   return /^[A-Za-z]$/i.test(ch);
