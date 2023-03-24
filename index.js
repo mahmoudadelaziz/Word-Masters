@@ -88,6 +88,12 @@ linesArray.forEach(function (line) {
           // The player entered an actual word
           console.log("This is an actual word!");
 
+          // Prevent the user from changing this line
+          Array.from(line.querySelectorAll(".letterSquare")).forEach(
+            (e) => {
+              e.disabled = true;
+            })
+
           // Scenario #1 (Dream World!)
           if (currntWord === wordOfTheDay) {
             // Player entered the Word of the Day
@@ -101,7 +107,7 @@ linesArray.forEach(function (line) {
             );
             // 3. Offer a reset option? More? (TBD)
             // .......}
-            
+
             // Scenario #2 (Valid word but not the WotD)
           }
         } else if (json.validWord === false) {
