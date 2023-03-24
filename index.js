@@ -4,7 +4,18 @@ let currentWord = "";
 let arr_guess = [];
 let arr_ans = [];
 
-fetch("https://words.dev-apis.com/word-of-the-day")
+function countElement(arr, elem) {
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr.includes(elem)) {
+      count++;
+      arr.splice(i, 1);
+    }
+  }
+  return count;
+}
+
+fetch("https://words.dev-apis.com/word-of-the-day?random=1")
   .then((Response) => Response.json())
   .then((json) => {
     console.log(`The answer is actually "${json.word}"`);
@@ -129,13 +140,7 @@ linesArray.forEach(function (line) {
                   // Turn the square background to light green
                   line[i].style.backgroundColor = "green";
                 }
-                // TRYING TO FIX DOUBLE LETTER ISSUE
-                // arr_guess.splice(i, 1);
-                // arr_ans.splice(i, 1);
               }
-              // TRYING TO FIX DOUBLE LETTER ISSUE
-              // arr_guess.splice(i, 1);
-              // arr_ans.splice(i, 1);
             }
           }
         } else if (json.validWord === false) {
