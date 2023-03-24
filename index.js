@@ -16,8 +16,17 @@ async function validateWord(inWord) {
     });
 }
 
+function getWord(myForm) {
+  // takes a form element, and returns the string value it holds
+  let wordArray = [];
+  Array.from(myForm.querySelectorAll(".letterSquare")).forEach((e) => {
+    wordArray.push(e.value);
+  });
+  return wordArray.join("");
+}
+
 function init() {
-  let currentLetter = 0;
+  let currentBox = 0;
   let lettersEntered = [];
   let wordGuessed = "";
 
@@ -25,8 +34,8 @@ function init() {
     // for each row
     for (let i = 1 + 6 * r; i < 6 + 6 * r; i++) {
       // for each input square on this row
-      currentLetter = document.getElementById(`letter${i}`);
-      currentLetter.addEventListener("keyup", (event) => {
+      currentBox = document.getElementById(`letter${i}`);
+      currentBox.addEventListener("keyup", (event) => {
         if (isAlpha(event.key)) {
           document.getElementById(`letter${i + 1}`).focus();
         } else if (event.key === "Backspace") {
@@ -40,14 +49,9 @@ function init() {
     // Submitting a guess
     document.forms[r].addEventListener("submit", (event) => {
       event.preventDefault();
-      // Getting the guessed word by combining the letters
-      Array.from(document.forms[r].querySelectorAll(".letterSquare")).forEach(
-        (e) => {
-          lettersEntered.push(e.value);
-        }
-      );
-      wordGuessed = lettersEntered.join("");
+      wordGuessed = getWord(document.forms[r]);
       console.log(wordGuessed);
+
       // reset buffers and get ready for next line
       lettersEntered = [];
       wordGuessed = "";
@@ -64,10 +68,10 @@ function init() {
 init();
 
 // // Async part
-// let elementsArray = Array.from(document.getElementsByTagName("form"));
+// let linesArray = Array.from(document.forms);
 
-// elementsArray.forEach(function (elem) {
-//   elem.addEventListener("submit", function () {
+// linesArray.forEach(function (line) {
+//   line.addEventListener("submit", function () {
 //     // Each time a word is Entered, do this
 //     fetch("https://words.dev-apis.com/validate-word", {
 //       method: "POST",
