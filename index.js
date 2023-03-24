@@ -89,20 +89,21 @@ linesArray.forEach(function (line) {
           console.log("This is an actual word!");
 
           // Scenario #1 (Dream World!)
-          if (currntWord === wordOfTheDay)
+          if (currntWord === wordOfTheDay) {
             // Player entered the Word of the Day
             // 1. Display Winning Message
             console.log("YOU WON! HOORAY!");
             // 2. End the game. Disable all inputs.
             Array.from(document.querySelectorAll(".letterSquare")).forEach(
-            (e) => {
-              e.disabled = true;
-            }
-          );
+              (e) => {
+                e.disabled = true;
+              }
+            );
             // 3. Offer a reset option? More? (TBD)
-            // .......
-          // Scenario #2 (Valid word but not the WotD)
-
+            // .......}
+            
+            // Scenario #2 (Valid word but not the WotD)
+          }
         } else if (json.validWord === false) {
           // The player entered a non-word
           console.log("This is a nonword!");
