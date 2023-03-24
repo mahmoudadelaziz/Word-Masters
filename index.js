@@ -89,10 +89,9 @@ linesArray.forEach(function (line) {
           console.log("This is an actual word!");
 
           // Prevent the user from changing this line
-          Array.from(line.querySelectorAll(".letterSquare")).forEach(
-            (e) => {
-              e.disabled = true;
-            })
+          Array.from(line.querySelectorAll(".letterSquare")).forEach((e) => {
+            e.disabled = true;
+          });
 
           // Scenario #1 (Dream World!)
           if (currntWord === wordOfTheDay) {
