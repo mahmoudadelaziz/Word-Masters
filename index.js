@@ -114,17 +114,17 @@ linesArray.forEach(function (line) {
             arr_guess = currentWord.split("");
             arr_ans = wordOfTheDay.split("");
             for (let i = 0; i < 5; i++) {
-              if (!wordOfTheDay.includes(currentWord[i])) {
+              if (!arr_ans.includes(arr_guess[i])) {
                 // The WoTD does NOT include this letter
                 // Turn the square background to grey
                 line[i].style.backgroundColor = "gray";
-              } else if (wordOfTheDay.includes(currentWord[i])) {
+              } else if (arr_ans.includes(arr_guess[i])) {
                 // A RIGHT LETTER
-                if (i != wordOfTheDay.indexOf(currentWord[i])) {
+                if (i != arr_ans.indexOf(arr_guess[i])) {
                   // THE RIGHT LETTER AT THE WRONG POSITION
                   // Turn the square background to orange
                   line[i].style.backgroundColor = "orange";
-                } else if (i === wordOfTheDay.indexOf(currentWord[i])) {
+                } else if (i === arr_ans.indexOf(arr_guess[i])) {
                   // THE RIGHT LETTER AT THE RIGHT POSITION
                   // Turn the square background to light green
                   line[i].style.backgroundColor = "lightgreen";
