@@ -1,5 +1,6 @@
 // Global variables
-let wordOfTheDay = ''
+let wordOfTheDay = "";
+let currntWord = "";
 
 fetch("https://words.dev-apis.com/word-of-the-day")
   .then((Response) => Response.json())
@@ -69,11 +70,13 @@ let linesArray = Array.from(document.forms);
 
 linesArray.forEach(function (line) {
   line.addEventListener("submit", function () {
+    // Set the current word to the word entered
+    currntWord = getWord(line);
     // Each time a word is Entered, do this
     fetch("https://words.dev-apis.com/validate-word", {
       method: "POST",
       body: JSON.stringify({
-        word: getWord(line),
+        word: currntWord,
       }),
     })
       .then((response) => response.json())
@@ -84,6 +87,22 @@ linesArray.forEach(function (line) {
         if (json.validWord === true) {
           // The player entered an actual word
           console.log("This is an actual word!");
+
+          // Scenario #1 (Dream World!)
+          if (currntWord === wordOfTheDay)
+            // Player entered the Word of the Day
+            // 1. Display Winning Message
+            console.log("YOU WON! HOORAY!");
+            // 2. End the game. Disable all inputs.
+            Array.from(document.querySelectorAll(".letterSquare")).forEach(
+            (e) => {
+              e.disabled = true;
+            }
+          );
+            // 3. Offer a reset option? More? (TBD)
+            // .......
+          // Scenario #2 (Valid word but not the WotD)
+
         } else if (json.validWord === false) {
           // The player entered a non-word
           console.log("This is a nonword!");
