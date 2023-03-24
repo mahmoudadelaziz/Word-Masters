@@ -15,7 +15,7 @@ function countElement(arr, elem) {
   return count;
 }
 
-fetch("https://words.dev-apis.com/word-of-the-day?random=1")
+fetch("https://words.dev-apis.com/word-of-the-day")
   .then((Response) => Response.json())
   .then((json) => {
     console.log(`The answer is actually "${json.word}"`);
@@ -78,7 +78,7 @@ function init() {
 // Setting things up
 init();
 
-// // Async part
+// Async part
 let linesArray = Array.from(document.forms);
 
 linesArray.forEach(function (line) {
@@ -141,6 +141,9 @@ linesArray.forEach(function (line) {
                   line[i].style.backgroundColor = "green";
                 }
               }
+              // An attempt to solve the double letter issue
+              arr_ans[i] = "";
+              arr_guess[i] = "";
             }
           }
         } else if (json.validWord === false) {
