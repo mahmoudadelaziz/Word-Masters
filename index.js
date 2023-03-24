@@ -1,6 +1,8 @@
 // Global variables
 let wordOfTheDay = "";
 let currntWord = "";
+let arr_guess = [];
+let arr_ans = [];
 
 fetch("https://words.dev-apis.com/word-of-the-day")
   .then((Response) => Response.json())
@@ -106,8 +108,21 @@ linesArray.forEach(function (line) {
             );
             // 3. Offer a reset option? More? (TBD)
             // .......}
-
+          } else {
             // Scenario #2 (Valid word but not the WotD)
+            // Compare letter by letter
+            // Prepare two arrays for comparison
+            arr_guess = currntWord.split("");
+            arr_ans = wordOfTheDay.split("");
+            arr_guess.forEach((guessLetter) => {
+              // For each letter in the guessed word,
+              // Q1: Is the current letter in the WoTD?
+              if (!wordOfTheDay.includes(guessLetter)) {
+                // The WoTD does NOT include this letter
+                // Turn the square background to grey
+                line[currntWord.indexOf(guessLetter)].style.backgroundColor = "gray"
+              }
+            });
           }
         } else if (json.validWord === false) {
           // The player entered a non-word
