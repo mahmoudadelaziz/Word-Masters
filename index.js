@@ -19,7 +19,6 @@ async function validateWord(inWord) {
 function init() {
   let currentLetter = 0;
   let lettersEntered = [];
-  let playerGuesses = [];
   let wordGuessed = "";
 
   for (let r = 0; r < 6; r++) {
@@ -29,7 +28,6 @@ function init() {
       currentLetter = document.getElementById(`letter${i}`);
       currentLetter.addEventListener("keyup", (event) => {
         if (isAlpha(event.key)) {
-          lettersEntered.push(event.key);
           document.getElementById(`letter${i + 1}`).focus();
         } else if (event.key === "Backspace") {
           lettersEntered.pop();
@@ -41,24 +39,28 @@ function init() {
     }
 
     // Submitting a guess
-    document
-      .getElementById(`row${r + 1}`)
-      .addEventListener("submit", (event) => {
-        event.preventDefault();
-        wordGuessed = lettersEntered.join("");
-        console.log(wordGuessed);
-
-        validateWord(wordGuessed);
-
-        // reset buffers and get ready for next line
-        lettersEntered = [];
-        wordGuessed = "";
-
-        // move focus to next line
-        if (r < 5) {
-          document.getElementById(`letter${r * 6 + 7}`).focus();
+    document.forms[r].addEventListener("submit", (event) => {
+      event.preventDefault();
+      // Getting the guessed word by combining the letters
+      Array.from(document.forms[r].querySelectorAll(".letterSquare")).forEach(
+        (e) => {
+          lettersEntered.push(e.value);
         }
-      });
+      );
+      wordGuessed = lettersEntered.join("");
+      console.log(wordGuessed);
+
+      validateWord(wordGuessed);
+
+      // reset buffers and get ready for next line
+      lettersEntered = [];
+      wordGuessed = "";
+
+      // move focus to next line
+      if (r < 5) {
+        document.getElementById(`letter${r * 6 + 7}`).focus();
+      }
+    });
   }
 }
 
