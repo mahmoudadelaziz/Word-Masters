@@ -8,6 +8,12 @@ async function validateWord(inWord) {
     .then((response) => response.json())
     .then((json) => {
       console.log(json.validWord);
+      // Valid/Invalid word logic here
+      if (json.validWord === true) {
+        console.log("This is an actual word!");
+      } else if (json.validWord === false) {
+        console.log("This is a nonword!");
+      }
     });
 }
 
