@@ -107,7 +107,6 @@ linesArray.forEach(function (line) {
               }
             );
             // 3. Offer a reset option? More? (TBD)
-            // .......}
           } else {
             // Scenario #2 (Valid word but not the WotD)
             // Compare letter by letter
@@ -129,7 +128,7 @@ linesArray.forEach(function (line) {
                   wordOfTheDay.indexOf(guessLetter)
                 ) {
                   // THE RIGHT LETTER AT THE WRONG POSITION
-                  // Turn the square background to yellow
+                  // Turn the square background to orange
                   line[currentWord.indexOf(guessLetter)].style.backgroundColor =
                     "orange";
                 } else if (
@@ -137,7 +136,7 @@ linesArray.forEach(function (line) {
                   wordOfTheDay.indexOf(guessLetter)
                 ) {
                   // THE RIGHT LETTER AT THE RIGHT POSITION
-                  // Turn the square background to green
+                  // Turn the square background to light green
                   line[currentWord.indexOf(guessLetter)].style.backgroundColor =
                     "lightgreen";
                 }
