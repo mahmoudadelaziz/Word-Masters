@@ -3,19 +3,6 @@ var isAlpha = function (ch) {
   return /^[A-Za-z]$/i.test(ch);
 };
 
-async function validateWord(inWord) {
-  fetch("https://words.dev-apis.com/validate-word", {
-    method: "POST",
-    body: JSON.stringify({
-      word: inWord,
-    }),
-  })
-    .then((response) => response.json())
-    .then((json) => {
-      console.log(json.validWord);
-    });
-}
-
 function getWord(myForm) {
   // takes a form element, and returns the string value it holds
   let wordArray = [];
