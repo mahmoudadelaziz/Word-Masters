@@ -18,7 +18,7 @@ function countElement(arr, elem) {
 fetch("https://words.dev-apis.com/word-of-the-day")
   .then((Response) => Response.json())
   .then((json) => {
-    console.log(`The answer is actually "${json.word}"`);
+    // console.log(`The answer is actually "${json.word}"`);
     wordOfTheDay = json.word;
   });
 
@@ -61,7 +61,7 @@ function init() {
     document.forms[r].addEventListener("submit", (event) => {
       event.preventDefault();
       wordGuessed = getWord(document.forms[r]);
-      console.log(wordGuessed);
+      // console.log(wordGuessed);
 
       // reset buffers and get ready for next line
       lettersEntered = [];
@@ -94,12 +94,12 @@ linesArray.forEach(function (line) {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json.validWord);
+        // console.log(json.validWord);
         // In this part,
         // we make the distinction between actual words and non-words
         if (json.validWord === true) {
           // The player entered an actual word
-          console.log("This is an actual word!");
+          // console.log("This is an actual word!");
 
           // Prevent the user from changing this line
           Array.from(line.querySelectorAll(".letterSquare")).forEach((e) => {
@@ -111,6 +111,8 @@ linesArray.forEach(function (line) {
             // Player entered the Word of the Day
             // 1. Display Winning Message
             console.log("YOU WON! HOORAY!");
+            document.getElementById("winning").id = "winningMessage" 
+            document.getElementById("winningMessage").innerHTML = "GOOD JOB! YOU WON!"
             // 2. End the game. Disable all inputs.
             Array.from(document.querySelectorAll(".letterSquare")).forEach(
               (e) => {

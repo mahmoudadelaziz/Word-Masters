@@ -1,30 +1,57 @@
 body {
-    background-color: seagreen;
-    font-weight: bolder;
-    width: 50%;
-    vertical-align: middle;
-    text-align: center;
+  background-color: seagreen;
+  font-weight: bolder;
+  width: 50%;
+  vertical-align: middle;
+  text-align: center;
 }
 
 h1 {
-    color: aliceblue;
-    text-align: center;
-    padding: 5%;
+  color: aliceblue;
+  text-align: center;
+  padding: 5%;
 }
 
 .letterSquare {
-    width: 50px;
-    height: 50px;
-    font-size: 20pt;
-    font-weight: bolder;
-    text-align: center;
-    border: 2.5pt;
-    border-color: slategrey;
-    border-style: double;
-    text-transform: uppercase;
-    margin: 0.25%;
+  width: 50px;
+  height: 50px;
+  font-size: 20pt;
+  font-weight: bolder;
+  text-align: center;
+  border: 2.5pt;
+  border-color: slategrey;
+  border-style: double;
+  text-transform: uppercase;
+  margin: 0.25%;
 }
 
 .letterSquare:disabled {
-    color: white;
+  color: white;
+}
+
+#winningMessage {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  vertical-align: middle;
+  padding: 2%;
+  margin: auto;
+  margin-top: 5%;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 20pt;
+  width: 200px;
+  height: 100px;
+  border-radius: 15%;
+  background-color: red;
+  animation-name: example;
+  animation-duration: 5s;
+}
+
+@keyframes example {
+  from {
+    background-color: red;
+  }
+  to {
+    background-color: blue;
+  }
 }
