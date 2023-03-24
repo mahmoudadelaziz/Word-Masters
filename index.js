@@ -63,17 +63,19 @@ linesArray.forEach(function (line) {
     fetch("https://words.dev-apis.com/validate-word", {
       method: "POST",
       body: JSON.stringify({
-        // ###Current Issue: How to catch the word entered?
         word: getWord(line),
       }),
     })
       .then((response) => response.json())
       .then((json) => {
         console.log(json.validWord);
-        // Valid/Invalid word logic here
+        // In this part,
+        // we make the distinction between actual words and non-words
         if (json.validWord === true) {
+          // The player entered an actual word
           console.log("This is an actual word!");
         } else if (json.validWord === false) {
+          // The player entered a non-word
           console.log("This is a nonword!");
         }
       });
