@@ -68,27 +68,27 @@ function init() {
 init();
 
 // // Async part
-// let linesArray = Array.from(document.forms);
+let linesArray = Array.from(document.forms);
 
-// linesArray.forEach(function (line) {
-//   line.addEventListener("submit", function () {
-//     // Each time a word is Entered, do this
-//     fetch("https://words.dev-apis.com/validate-word", {
-//       method: "POST",
-//       body: JSON.stringify({
-//         // ###Current Issue: How to catch the word entered?
-//         word: wordGuessed,
-//       }),
-//     })
-//       .then((response) => response.json())
-//       .then((json) => {
-//         console.log(json.validWord);
-//         // Valid/Invalid word logic here
-//         if (json.validWord === true) {
-//           console.log("This is an actual word!");
-//         } else if (json.validWord === false) {
-//           console.log("This is a nonword!");
-//         }
-//       });
-//   });
-// });
+linesArray.forEach(function (line) {
+  line.addEventListener("submit", function () {
+    // Each time a word is Entered, do this
+    fetch("https://words.dev-apis.com/validate-word", {
+      method: "POST",
+      body: JSON.stringify({
+        // ###Current Issue: How to catch the word entered?
+        word: getWord(line),
+      }),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json.validWord);
+        // Valid/Invalid word logic here
+        if (json.validWord === true) {
+          console.log("This is an actual word!");
+        } else if (json.validWord === false) {
+          console.log("This is a nonword!");
+        }
+      });
+  });
+});
