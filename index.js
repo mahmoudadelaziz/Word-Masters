@@ -78,9 +78,9 @@ linesArray.forEach(function (line) {
           // The player entered a non-word
           console.log("This is a nonword!");
           // 1. Reset the whole line
-          line.querySelectorAll(".letterSquare").forEach((e)=>(e.value = ''))
+          line.querySelectorAll(".letterSquare").forEach((e) => (e.value = ""));
           // 2. Move the focus back to the first box on the line
-          line.querySelector("input").focus()
+          line.querySelector("input").focus();
         }
       });
   });
