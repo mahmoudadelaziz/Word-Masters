@@ -15,7 +15,7 @@ function countElement(arr, elem) {
   return count;
 }
 
-fetch("https://words.dev-apis.com/word-of-the-day")
+fetch("https://words.dev-apis.com/word-of-the-day?random=1")
   .then((Response) => Response.json())
   .then((json) => {
     // console.log(`The answer is actually "${json.word}"`);
