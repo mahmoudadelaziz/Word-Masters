@@ -1,26 +1,11 @@
+import {getWOTD} from "./getWOTD.js"
+let wordOfTheDay = getWOTD("./getWOTD.js")
+
 // Global variables
-let wordOfTheDay = "";
+// let wordOfTheDay = "";
 let currentWord = "";
 let arr_guess = [];
 let arr_ans = [];
-
-function countElement(arr, elem) {
-  let count = 0;
-  for (let i = 0; i < arr.length; i++) {
-    if (arr.includes(elem)) {
-      count++;
-      arr.splice(i, 1);
-    }
-  }
-  return count;
-}
-
-fetch("https://words.dev-apis.com/word-of-the-day?random=1")
-  .then((Response) => Response.json())
-  .then((json) => {
-    // console.log(`The answer is actually "${json.word}"`);
-    wordOfTheDay = json.word;
-  });
 
 // Function definitions
 var isAlpha = function (ch) {
