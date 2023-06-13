@@ -129,13 +129,13 @@ linesArray.forEach(function (line) {
                 }
               }
               // An attempt to solve the double letter issue
-              // arr_ans[i] = ""; // WRONG! If this letter didn't match, maybe the next one will!
-              // arr_guess[i] = ""; // Unnecessary! We are moving on to the next one anyway!
+              arr_ans[i] = "";
+              arr_guess[i] = "";
             }
           }
         } else if (json.validWord === false) {
           // The player entered a non-word
-          // console.log("This is a nonword!");
+          console.log("This is a nonword!");
           // 1. Reset the whole line
           line.querySelectorAll(".letterSquare").forEach((e) => (e.value = ""));
           // 2. Move the focus back to the first box on the line
