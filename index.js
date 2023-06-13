@@ -1,13 +1,21 @@
-import {getWOTD} from "./getWOTD.js"
-let wordOfTheDay = getWOTD("./getWOTD.js")
-
 // Global variables
-// let wordOfTheDay = "";
+let wordOfTheDay = "";
 let currentWord = "";
 let arr_guess = [];
 let arr_ans = [];
 
-// Function definitions
+// ----- Function definitions -----
+// Function to get the Word of the Day
+function getWOTD() {
+  fetch("https://words.dev-apis.com/word-of-the-day?random=1")
+    .then((Response) => Response.json())
+    .then((json) => {
+    //   wordOfTheDay = json.word;
+    console.log(json.word)
+    wordOfTheDay = json.word
+    });
+}
+
 var isAlpha = function (ch) {
   return /^[A-Za-z]$/i.test(ch);
 };
@@ -25,6 +33,8 @@ function init() {
   let currentBox = 0;
   let lettersEntered = [];
   let wordGuessed = "";
+
+  getWOTD()
 
   for (let r = 0; r < 6; r++) {
     // for each row
@@ -129,13 +139,13 @@ linesArray.forEach(function (line) {
                 }
               }
               // An attempt to solve the double letter issue
-              arr_ans[i] = "";
-              arr_guess[i] = "";
+              // arr_ans[i] = ""; // WRONG! If this letter didn't match, maybe the next one will!
+              // arr_guess[i] = ""; // Unnecessary! We are moving on to the next one anyway!
             }
           }
         } else if (json.validWord === false) {
           // The player entered a non-word
-          console.log("This is a nonword!");
+          // console.log("This is a nonword!");
           // 1. Reset the whole line
           line.querySelectorAll(".letterSquare").forEach((e) => (e.value = ""));
           // 2. Move the focus back to the first box on the line
