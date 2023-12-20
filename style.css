@@ -55,3 +55,17 @@ h1 {
     background-color: blue;
   }
 }
+
+.btn, .delete, .enter {
+	font-size: 1.25em;
+	font-weight: bold;
+	border-radius: 4px;
+	cursor: pointer;
+	background-color: gray;
+	color: white;
+	justify-content: center;
+	align-items: center;
+	text-transform: uppercase;
+  padding: 10px;
+  margin: 5px;
+}
