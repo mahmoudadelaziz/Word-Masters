@@ -18,7 +18,8 @@ async function getWordOfTheDay() {
 
     const json = await response.json();
     console.log("Word of the day is:", json.word);
-    return json.word;
+    wordOfTheDay = json.word;
+    return wordOfTheDay;
   } catch (error) {
     console.error("Error fetching word of the day:", error);
     return null;
