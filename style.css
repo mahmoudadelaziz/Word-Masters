@@ -20,7 +20,7 @@ h1 {
   border: 2.5pt solid slategrey; /* Added border-style */
   border-radius: 20%;
   text-transform: uppercase;
-  margin: 1%; /* Adjusted margin for better consistency */
+  margin: 0.5%; /* Adjusted margin for better consistency */
 }
 
 .letterSquare:disabled {
