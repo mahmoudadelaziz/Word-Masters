@@ -102,17 +102,39 @@ function init() {
       // reset buffers and get ready for next line
       lettersEntered = [];
       wordGuessed = "";
-
       // move focus to next line
       if (r < 5) {
         document.getElementById(`letter${r * 6 + 7}`).focus();
       }
     });
   }
+
+    // Get all the letter buttons from the virtual keyboards
+    const VKButtons = document.getElementsByClassName("btn")
+    // Wire them up with event handlers
+    Array.from(VKButtons).forEach((e) => {
+      e.addEventListener("click", (event) => {
+        console.log("Debugging:", event.target.textContent)
+        // Virtual Keyboard logic
+      })
+    })
 }
+
+// function setUpVirtualKeyboard(){
+//   // Get all the letter buttons from the virtual keyboards
+//   const VKButtons = document.getElementsByClassName("btn")
+//   // Wire them up with event handlers
+//   Array.from(VKButtons).forEach((e) => {
+//     e.addEventListener("click", (event) => {
+//       console.log("Debugging:", event.target.textContent)
+//       // Virtual Keyboard logic
+//     })
+//   })
+// }
 
 // Setting things up
 init();
+// setUpVirtualKeyboard()
 // Reset all
 document.querySelectorAll(".letterSquare").forEach((e) => (e.value = ""));
 
