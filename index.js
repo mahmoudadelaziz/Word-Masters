@@ -1,5 +1,5 @@
 // Global variables
-let wordOfTheDay = "";
+let secretWord = "";
 let currentWord = "";
 let guessParts = [];
 let wordParts = [];
@@ -7,7 +7,7 @@ const ANSWER_LENGTH = 5;
 
 // ----- Function definitions -----
 // Function to get the Word of the Day
-async function getWordOfTheDay() {
+async function getSecretWord() {
   try {
     const response = await fetch(
       "https://words.dev-apis.com/word-of-the-day?random=1"
@@ -19,9 +19,9 @@ async function getWordOfTheDay() {
 
     const json = await response.json();
     console.log("Word of the day is:", json.word);
-    wordOfTheDay = json.word;
-    wordParts = wordOfTheDay.split("");
-    return wordOfTheDay;
+    secretWord = json.word;
+    wordParts = secretWord.split("");
+    return secretWord;
   } catch (error) {
     console.error("Error fetching word of the day:", error);
     return null;
@@ -60,7 +60,7 @@ function makeMap(array) {
 function init() {
   let currentBox = 0;
 
-  getWordOfTheDay();
+  getSecretWord();
 
   // Handling user interaction
   for (let r = 0; r < 6; r++) {
@@ -98,8 +98,6 @@ function init() {
     document.forms[r].addEventListener("submit", (event) => {
       event.preventDefault();
       wordGuessed = getWord(document.forms[r]);
-      // console.log(wordGuessed);
-
       // reset buffers and get ready for next line
       lettersEntered = [];
       wordGuessed = "";
@@ -114,7 +112,7 @@ function init() {
 
 // Setting things up
 init();
-// 1. Reset the whole line
+// Reset all
 document.querySelectorAll(".letterSquare").forEach((e) => (e.value = ""));
 
 // Async part
@@ -145,8 +143,8 @@ linesArray.forEach(function (line) {
             e.disabled = true;
           });
 
-          // Scenario #1 (Dream World!)
-          if (currentWord === wordOfTheDay) {
+          // Winning Logic
+          if (currentWord === secretWord) {
             // Player entered the Word of the Day
             // 1. Display Winning Message
             console.log("YOU WON! HOORAY!");
@@ -159,12 +157,8 @@ linesArray.forEach(function (line) {
                 e.disabled = true;
               }
             );
-            // 3. Offer a reset option? More? (TBD)
           } else {
-            // Scenario #2 (Valid word but not the WotD)
-            // Compare letter by letter
-            // Prepare two arrays for comparison
-            const matchedIndices = new Set();
+            // Scenario #2 (Valid word but not the Answer)
             guessParts = currentWord.split("");
             const map = makeMap(wordParts);
 
