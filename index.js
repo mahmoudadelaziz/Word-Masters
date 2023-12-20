@@ -3,6 +3,7 @@ let secretWord = "";
 let currentWord = "";
 let guessParts = [];
 let wordParts = [];
+let excludedLetters = new Set();
 const ANSWER_LENGTH = 5;
 
 // ----- Function definitions -----
@@ -182,6 +183,17 @@ linesArray.forEach(function (line) {
                 // wrong
                 allRight = false;
                 line[i].style.backgroundColor = "gray";
+                if(!secretWord.includes(guessParts[i])) {
+                  excludedLetters.add(guessParts[i])
+                }
+                console.log("Excluded letters:", excludedLetters)
+
+                Array.from(document.getElementsByClassName("btn")).forEach((e) => 
+                {
+                  if(excludedLetters.has(e.textContent.toLowerCase())) {
+                    e.style.color = "red";
+                  }
+                })
               }
             }
           }
