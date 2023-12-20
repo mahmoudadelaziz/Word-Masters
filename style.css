@@ -1,14 +1,13 @@
 body {
-  background-color: seagreen;
+  background-color: black;
   font-weight: bolder;
   width: 50%;
-  vertical-align: middle;
   text-align: center;
+  vertical-align: middle;
 }
 
 h1 {
   color: aliceblue;
-  text-align: center;
   padding: 5%;
 }
 
@@ -18,11 +17,10 @@ h1 {
   font-size: 20pt;
   font-weight: bolder;
   text-align: center;
-  border: 2.5pt;
-  border-color: slategrey;
-  border-style: double;
+  border: 2.5pt solid slategrey; /* Added border-style */
+  border-radius: 20%;
   text-transform: uppercase;
-  margin: 0.25%;
+  margin: 1%; /* Adjusted margin for better consistency */
 }
 
 .letterSquare:disabled {
@@ -33,7 +31,7 @@ h1 {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   vertical-align: middle;
   padding: 2%;
-  margin: auto;
+  margin: 5% auto; /* Centered the message horizontally */
   margin-top: 5%;
   text-align: center;
   color: white;
@@ -45,6 +43,8 @@ h1 {
   background-color: red;
   animation-name: example;
   animation-duration: 5s;
+  animation-timing-function: ease-in-out; /* Added easing function */
+  animation-iteration-count: infinite; /* Example - make it infinite or adjust as needed */
 }
 
 @keyframes example {
