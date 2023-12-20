@@ -164,6 +164,9 @@ linesArray.forEach(function (line) {
                 e.disabled = true;
               }
             );
+            Array.from(line.querySelectorAll(".letterSquare")).forEach((e) => {
+              e.style.backgroundColor = "green";
+            });
           } else {
             // Scenario #2 (Valid word but not the Answer)
             guessParts = currentWord.split("");
