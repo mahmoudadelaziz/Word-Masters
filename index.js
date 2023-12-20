@@ -3,6 +3,7 @@ let secretWord = "";
 let currentWord = "";
 let guessParts = [];
 let wordParts = [];
+let excludedLetters = new Set();
 const ANSWER_LENGTH = 5;
 
 // ----- Function definitions -----
@@ -101,13 +102,22 @@ function init() {
       // reset buffers and get ready for next line
       lettersEntered = [];
       wordGuessed = "";
-
       // move focus to next line
       if (r < 5) {
         document.getElementById(`letter${r * 6 + 7}`).focus();
       }
     });
   }
+
+    // Get all the letter buttons from the virtual keyboards
+    const VKButtons = document.getElementsByClassName("btn")
+    // Wire them up with event handlers
+    Array.from(VKButtons).forEach((e) => {
+      e.addEventListener("click", (event) => {
+        console.log("Debugging:", event.target.textContent)
+        // Virtual Keyboard logic
+      })
+    })
 }
 
 // Setting things up
@@ -131,13 +141,10 @@ linesArray.forEach(function (line) {
     })
       .then((response) => response.json())
       .then((json) => {
-        // console.log(json.validWord);
         // In this part,
         // we make the distinction between actual words and non-words
         if (json.validWord === true) {
           // The player entered an actual word
-          // console.log("This is an actual word!");
-
           // Prevent the user from changing this line
           Array.from(line.querySelectorAll(".letterSquare")).forEach((e) => {
             e.disabled = true;
@@ -157,6 +164,9 @@ linesArray.forEach(function (line) {
                 e.disabled = true;
               }
             );
+            Array.from(line.querySelectorAll(".letterSquare")).forEach((e) => {
+              e.style.backgroundColor = "green";
+            });
           } else {
             // Scenario #2 (Valid word but not the Answer)
             guessParts = currentWord.split("");
@@ -182,12 +192,22 @@ linesArray.forEach(function (line) {
                 // wrong
                 allRight = false;
                 line[i].style.backgroundColor = "gray";
+                if(!secretWord.includes(guessParts[i])) {
+                  excludedLetters.add(guessParts[i])
+                }
+                console.log("(Debugging) Excluded letters:", excludedLetters)
+
+                Array.from(document.getElementsByClassName("btn")).forEach((e) => 
+                {
+                  if(excludedLetters.has(e.textContent.toLowerCase())) {
+                    e.style.color = "red";
+                  }
+                })
               }
             }
           }
         } else if (json.validWord === false) {
           // The player entered a non-word
-          // console.log("This is a nonword!");
           // 1. Reset the whole line
           line.querySelectorAll(".letterSquare").forEach((e) => (e.value = ""));
           // 2. Move the focus back to the first box on the line
