@@ -6,14 +6,23 @@ let arr_ans = [];
 
 // ----- Function definitions -----
 // Function to get the Word of the Day
-function getWOTD() {
-  fetch("https://words.dev-apis.com/word-of-the-day?random=1")
-    .then((Response) => Response.json())
-    .then((json) => {
-    //   wordOfTheDay = json.word;
-    console.log(json.word)
-    wordOfTheDay = json.word
-    });
+async function getWordOfTheDay() {
+  try {
+    const response = await fetch(
+      "https://words.dev-apis.com/word-of-the-day?random=1"
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const json = await response.json();
+    console.log("Word of the day is:", json.word);
+    return json.word;
+  } catch (error) {
+    console.error("Error fetching word of the day:", error);
+    return null;
+  }
 }
 
 var isAlpha = function (ch) {
@@ -21,7 +30,7 @@ var isAlpha = function (ch) {
 };
 
 function getWord(myForm) {
-  // takes a form element, and returns the string value it holds
+  // takes a form element (a row), and returns the string value (guess word) it holds
   let wordArray = [];
   Array.from(myForm.querySelectorAll(".letterSquare")).forEach((e) => {
     wordArray.push(e.value);
@@ -31,22 +40,36 @@ function getWord(myForm) {
 
 function init() {
   let currentBox = 0;
-  let lettersEntered = [];
-  let wordGuessed = "";
 
-  getWOTD()
+  getWordOfTheDay();
 
+  // Handling user interaction
   for (let r = 0; r < 6; r++) {
-    // for each row
+    // for each row (guess word line)
     for (let i = 1 + 6 * r; i < 6 + 6 * r; i++) {
       // for each input square on this row
+      // Get the current letter box in a variable
       currentBox = document.getElementById(`letter${i}`);
-      currentBox.addEventListener("keyup", (event) => {
-        if (isAlpha(event.key)) {
+      // Listen for user input
+      currentBox.addEventListener("keydown", (event) => {
+        let input = event.target.value;
+        if (input.length === 1 && isAlpha(event.key)) {
+          // if the user input is a valid letter
+          // move on to the next letter box
           document.getElementById(`letter${i + 1}`).focus();
-        } else if (event.key === "Backspace") {
+        }
+      });
+
+      // Listen for Backspace key press
+      currentBox.addEventListener("keydown", (event) => {
+        if (event.key === "Backspace" && event.target.value === "") {
+          // if Backspace is pressed and the box is empty
+          // move back to the previous letter box
           if (i != 1) {
-            document.getElementById(`letter${i - 1}`).focus();
+            let prevBox = document.getElementById(`letter${i - 1}`);
+            if (prevBox) {
+              prevBox.focus();
+            }
           }
         }
       });
@@ -106,8 +129,9 @@ linesArray.forEach(function (line) {
             // Player entered the Word of the Day
             // 1. Display Winning Message
             console.log("YOU WON! HOORAY!");
-            document.getElementById("winning").id = "winningMessage" 
-            document.getElementById("winningMessage").innerHTML = "GOOD JOB! YOU WON!"
+            document.getElementById("winning").id = "winningMessage";
+            document.getElementById("winningMessage").innerHTML =
+              "GOOD JOB! YOU WON!";
             // 2. End the game. Disable all inputs.
             Array.from(document.querySelectorAll(".letterSquare")).forEach(
               (e) => {
