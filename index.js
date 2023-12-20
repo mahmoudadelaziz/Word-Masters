@@ -1,8 +1,9 @@
 // Global variables
 let wordOfTheDay = "";
 let currentWord = "";
-let arr_guess = [];
-let arr_ans = [];
+let guessParts = [];
+let wordParts = [];
+const ANSWER_LENGTH = 5;
 
 // ----- Function definitions -----
 // Function to get the Word of the Day
@@ -19,6 +20,7 @@ async function getWordOfTheDay() {
     const json = await response.json();
     console.log("Word of the day is:", json.word);
     wordOfTheDay = json.word;
+    wordParts = wordOfTheDay.split("");
     return wordOfTheDay;
   } catch (error) {
     console.error("Error fetching word of the day:", error);
@@ -37,6 +39,22 @@ function getWord(myForm) {
     wordArray.push(e.value);
   });
   return wordArray.join("");
+}
+
+function makeMap(array) {
+  // takes an array of letters (like ['E', 'L', 'I', 'T', 'E']) and creates
+  // an object out of it (like {E: 2, L: 1, T: 1}) so we can use that to
+  // make sure we get the correct amount of letters marked close instead
+  // of just wrong or correct
+  const obj = {};
+  for (let i = 0; i < array.length; i++) {
+    if (obj[array[i]]) {
+      obj[array[i]]++;
+    } else {
+      obj[array[i]] = 1;
+    }
+  }
+  return obj;
 }
 
 function init() {
@@ -96,6 +114,8 @@ function init() {
 
 // Setting things up
 init();
+// 1. Reset the whole line
+document.querySelectorAll(".letterSquare").forEach((e) => (e.value = ""));
 
 // Async part
 let linesArray = Array.from(document.forms);
@@ -144,28 +164,31 @@ linesArray.forEach(function (line) {
             // Scenario #2 (Valid word but not the WotD)
             // Compare letter by letter
             // Prepare two arrays for comparison
-            arr_guess = currentWord.split("");
-            arr_ans = wordOfTheDay.split("");
-            for (let i = 0; i < 5; i++) {
-              if (!arr_ans.includes(arr_guess[i])) {
-                // The WoTD does NOT include this letter
-                // Turn the square background to grey
-                line[i].style.backgroundColor = "gray";
-              } else if (arr_ans.includes(arr_guess[i])) {
-                // A RIGHT LETTER
-                if (i != arr_ans.indexOf(arr_guess[i])) {
-                  // THE RIGHT LETTER AT THE WRONG POSITION
-                  // Turn the square background to orange
-                  line[i].style.backgroundColor = "orange";
-                } else if (i === arr_ans.indexOf(arr_guess[i])) {
-                  // THE RIGHT LETTER AT THE RIGHT POSITION
-                  // Turn the square background to light green
-                  line[i].style.backgroundColor = "green";
-                }
+            const matchedIndices = new Set();
+            guessParts = currentWord.split("");
+            const map = makeMap(wordParts);
+
+            for (let i = 0; i < ANSWER_LENGTH; i++) {
+              if (guessParts[i] === wordParts[i]) {
+                // mark as correct
+                line[i].style.backgroundColor = "green";
+                map[guessParts[i]]--;
               }
-              // An attempt to solve the double letter issue
-              // arr_ans[i] = ""; // WRONG! If this letter didn't match, maybe the next one will!
-              // arr_guess[i] = ""; // Unnecessary! We are moving on to the next one anyway!
+            }
+
+            for (let i = 0; i < ANSWER_LENGTH; i++) {
+              if (guessParts[i] === wordParts[i]) {
+                // do nothing
+              } else if (map[guessParts[i]] && map[guessParts[i]] > 0) {
+                // mark as close
+                allRight = false;
+                line[i].style.backgroundColor = "orange";
+                map[guessParts[i]]--;
+              } else {
+                // wrong
+                allRight = false;
+                line[i].style.backgroundColor = "gray";
+              }
             }
           }
         } else if (json.validWord === false) {
