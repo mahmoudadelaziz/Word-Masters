@@ -141,9 +141,7 @@ body {
   animation: rainbow 4s infinite linear;
 }
 
-.btn,
-.delete,
-.enter {
+.btn {
   font-size: 1.25em;
   font-weight: bold;
   border-radius: 4px;
