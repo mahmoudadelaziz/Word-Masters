@@ -177,6 +177,10 @@ body {
 /* Media query for mobile screens */
 @media only screen and (max-width: 800px) {
   .gameboard {
+    /* align-items: center; */
+    place-content: center;
+    text-align: center;
+    place-self: center;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
 
