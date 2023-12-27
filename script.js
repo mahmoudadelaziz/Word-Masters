@@ -166,7 +166,7 @@ async function init() {
       console.log(event.target.textContent);
       if (event.target.textContent === "Enter") {
         submitGuess();
-      } else if (event.target.textContent === "Backspace") {
+      } else if (event.target.textContent === "⌫") {
         backspace();
       } else {
         addLetter(event.target.textContent);

@@ -6,6 +6,8 @@ body {
   color: #333;
   margin: 0;
   padding: 0;
+  display: grid;
+  place-items: center;
 }
 
 .navbar {
@@ -142,17 +144,22 @@ body {
 }
 
 .keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   margin-top: 0.5%;
 }
 
+.row {
+  margin-top: 0.5%;
+}
+
 .btn {
-  height: 10;
-  width: 10;
+  display: inline-block;
   font-size: 1.2em;
   font-weight: bold;
   border-radius: 8px;
-  cursor: pointer;
   background-color: #4a4a4a;
   color: #fff;
   text-transform: uppercase;
@@ -164,4 +171,40 @@ body {
 
 .btn:hover {
   background-color: #666;
+}
+
+/* Media query for mobile screens */
+@media only screen and (max-width: 800px) {
+  .gameboard {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  .gameboard-letter {
+    height: 60px;
+    width: 60px;
+    font-size: 40px;
+  }
+
+  .brand {
+    font-size: 40px;
+  }
+
+  .keyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 0.5%;
+  }
+  
+  .row {
+    margin-top: 0.5%;
+  }
+
+  .btn {
+    display: inline-block;
+    margin: auto;
+    font-size: 1.2em;
+    padding: 15px 10px;
+  }
 }
