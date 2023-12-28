@@ -6,7 +6,9 @@ body {
   color: #333;
   margin: 0;
   padding: 0;
-  display: grid;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
   place-items: center;
 }
 
@@ -145,14 +147,18 @@ body {
 
 .keyboard {
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
   margin-top: 0.5%;
 }
 
 .row {
-  margin-top: 0.5%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  margin-top: auto;
 }
 
 .btn {
@@ -165,52 +171,9 @@ body {
   text-transform: uppercase;
   padding: 12px 20px;
   margin: auto;
-  padding: 15px 10px;
-  border: none;
   transition: background-color 0.3s ease-in-out;
 }
 
 .btn:hover {
   background-color: #666;
-}
-
-/* Media query for mobile screens */
-@media only screen and (max-width: 800px) {
-  .gameboard {
-    /* align-items: center; */
-    place-content: center;
-    text-align: center;
-    place-self: center;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  }
-
-  .gameboard-letter {
-    height: 60px;
-    width: 60px;
-    font-size: 40px;
-  }
-
-  .brand {
-    font-size: 40px;
-  }
-
-  .keyboard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-top: 0.5%;
-  }
-  
-  .row {
-    margin: auto;
-    margin-top: 0.5%;
-  }
-
-  .btn {
-    display: inline-block;
-    margin: auto;
-    font-size: 1.2em;
-    padding: 15px 10px;
-  }
 }
