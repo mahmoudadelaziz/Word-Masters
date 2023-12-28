@@ -91,10 +91,12 @@ async function init() {
         letters[currentRow * ANSWER_LENGTH + i].classList.add("wrong");
 
         // Show the excluded (wrong) letters on the virtual keyboard
-        excludedLetters.add(guessParts[i]);
-        console.log(
-          `🔎 (Debugging) The excluded letters are ${[...excludedLetters]}`
-        );
+        if (!wordParts.includes(guessParts[i])) {
+          excludedLetters.add(guessParts[i]);
+          console.log(
+            `🔎 (Debugging) The excluded letters are ${[...excludedLetters]}`
+          );
+        } 
 
         virtualKeyboardKeys.forEach((key) => {
           // Note: this loop runs every time a wrong letter is entered.
