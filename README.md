@@ -8,7 +8,7 @@ The files in this repository are organized as follows:
 
 - `index.html`: The main HTML file that contains the structure of the game and links necessary scripts and styles.
 - `style.css`: The CSS file responsible for the styling and layout of the game interface.
-- `index.js`: The JavaScript file that implements the logic of the Wordle game, handling user interactions, word validation, and result computation.
+- `script.js`: The JavaScript file that implements the logic of the Wordle game, handling user interactions, word validation, and result computation.
 
 ## Getting Started
 
