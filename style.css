@@ -147,26 +147,28 @@ body {
 .keyboard {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   text-align: center;
-  margin-top: 5%;
+  margin: auto;
 }
 
 .row {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
+  flex-shrink: 3;
   margin: auto;
 }
 
 .btn {
-  font-size: 1.2em;
+  font-size: 1em;
+  flex-shrink: 3;
   font-weight: bold;
   border-radius: 8px;
   background-color: #4a4a4a;
   color: #fff;
   text-transform: uppercase;
-  padding: 5px 8px;
+  padding: 10px 8px;
   margin: auto;
   transition: background-color 0.3s ease-in-out;
 }
